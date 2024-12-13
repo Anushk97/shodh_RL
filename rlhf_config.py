@@ -13,4 +13,4 @@ class RLHFConfig:
     value_loss_coef: float = 0.1
     entropy_coef: float = 0.01
     kl_target: float = 0.1
-    n_steps: int = 128
+    n_steps: int = 256

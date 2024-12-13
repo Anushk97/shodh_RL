@@ -29,10 +29,10 @@ class PPORLHFTrainer:
         env,
         model_name: str,
         total_timesteps: int,
-        learning_rate: float = 1e-4,
-        n_steps: int = 2048,
-        batch_size: int = 64,
-        n_epochs: int = 10,
+        learning_rate: float = 3e-4,
+        n_steps: int = 256,
+        batch_size: int = 32,
+        n_epochs: int = 5,
         gamma: float = 0.99,
         gae_lambda: float = 0.95,
         clip_range: float = 0.2,
@@ -291,7 +291,7 @@ class MathRLHFEnv(gym.Env):
             print('--------------------------------')
             print(f"Raw Correct Solution (EQ): {correct_solution}")
             print('--------------------------------')
-            # Check for key mathematical terms and operations
+            
             math_terms = ['add', 'subtract', 'multiply', 'divide', 'equals', 
                         'sum', 'total', 'difference', 'product', 'quotient',
                         '+', '-', '*', '/', '=', '$']
@@ -472,12 +472,11 @@ class TensorboardCallback(BaseCallback):
         
     def _on_step(self) -> bool:
         if self.n_calls % self._log_freq == 0:
-            # Log rewards
+            
             self.writer.add_scalar('rewards/mean_reward', 
                                  self.locals['rewards'][0], 
                                  self.n_calls)
             
-            # Log losses from the model's logger
             if len(self.model.logger.name_to_value) > 0:
                 self.writer.add_scalar('losses/policy_loss',
                                      self.model.logger.name_to_value['train/policy_loss'],
@@ -597,11 +596,11 @@ def train_gp_with_rlhf():
 
 
 ### RUN TRAINER 01 ###
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 ### RUN TRAINER 02 ###
-# if __name__ == "__main__":
-#     train_gp_with_rlhf()
+if __name__ == "__main__":
+    train_gp_with_rlhf()
 
 

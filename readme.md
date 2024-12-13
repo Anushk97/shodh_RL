@@ -17,7 +17,7 @@ The system uses PPO (Proximal Policy Optimization) to fine-tune language models 
 
 2. Install dependencies: ```pip install -r requirements.txt```
 
-3. Run the training script: ```python train_rlhf.py```
+3. Run the training script (choose trainer 01 or trainer 02): ```python train_rlhf.py```
 
 4. View training results in WandB and TensorBoard.
 
