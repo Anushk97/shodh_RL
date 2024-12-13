@@ -15,9 +15,13 @@ The system uses PPO (Proximal Policy Optimization) to fine-tune language models 
 
 1. Clone the repository: ```git clone https://github.com/Anushk97/shodh_RL.git```
 
-2. Install dependencies: ```pip install -r requirements.txt```
+2. Make virtual environment: ```python -m venv venv```
 
-3. Run the training script (choose trainer 01 or trainer 02): ```python train_rlhf.py```
+3. Activate virtual environment: ```source venv/bin/activate```
 
-4. View training results in WandB and TensorBoard.
+4. Install dependencies: ```pip install -r requirements.txt```
+
+5. Run the training script (choose trainer 01 or trainer 02): ```python train_rlhf.py```
+
+6. View training results in WandB and TensorBoard.
 

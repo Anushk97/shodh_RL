@@ -113,18 +113,18 @@ def main():
     # model_config = AutoConfig.from_pretrained("microsoft/phi-2")
     # model_config.use_cache = False  # More stable
 
-    model_name = "microsoft/phi-1_5"
+    model_name = "microsoft/phi-1.5"
     
     print(f"Loading {model_name}...")
     gp_model = AutoModelForCausalLM.from_pretrained(
-        model_name,
+        config.gp_model_path,
         trust_remote_code=True,
         torch_dtype=torch.float32,
         low_cpu_mem_usage=True
     ).to(device)
     
     eq_model = AutoModelForCausalLM.from_pretrained(
-        model_name,
+        config.eq_model_path,
         trust_remote_code=True,
         torch_dtype=torch.float32,
         low_cpu_mem_usage=True
@@ -145,7 +145,6 @@ def main():
     
     # gp_model = gp_model.to(device)
     # eq_model =eq_model.to(device)
-
     
     print(f"GP Model dtype: {next(gp_model.parameters()).dtype}")
     print(f"EQ Model dtype: {next(eq_model.parameters()).dtype}")
@@ -502,17 +501,17 @@ def train_gp_with_rlhf():
     print(f"Using device: {device}")
     
     print("Loading models...")
-    model_name = "microsoft/phi-1_5"
+    model_name = 'microsoft/phi-1.5'
     
     gp_model = AutoModelForCausalLM.from_pretrained(
-        model_name,
+        config.gp_model_path,
         trust_remote_code=True,
         torch_dtype=torch.float32,
         low_cpu_mem_usage=True
     ).to(device)
     
     eq_model = AutoModelForCausalLM.from_pretrained(
-        model_name,
+        config.eq_model_path,
         trust_remote_code=True,
         torch_dtype=torch.float32,
         low_cpu_mem_usage=True
@@ -596,11 +595,11 @@ def train_gp_with_rlhf():
 
 
 ### RUN TRAINER 01 ###
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
 
 ### RUN TRAINER 02 ###
-if __name__ == "__main__":
-    train_gp_with_rlhf()
+# if __name__ == "__main__":
+#     train_gp_with_rlhf()
 
 
