@@ -1,0 +1,18 @@
+
+torch>=2.0.0
+transformers>=4.34.0
+numpy>=1.24.0
+stable-baselines3>=2.1.0
+gym>=0.26.0
+gymnasium>=0.29.1
+wandb>=0.15.0
+tensorboard>=2.14.0
+matplotlib>=3.7.0
+shimmy>=2.0
+stable-baselines3[extra]
+tqdm>=4.66.0
+rich>=13.7.0
+
+# Optional
+accelerate>=0.24.0
+bitsandbytes>=0.41.0
