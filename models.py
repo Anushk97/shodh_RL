@@ -15,7 +15,6 @@ class LanguagePPOPolicy(ActorCriticPolicy):
             **kwargs
         )
         
-        # process input tokens
         self.feature_extractor = nn.Sequential(
             nn.Linear(observation_space.shape[0], 256),
             nn.ReLU(),
@@ -41,6 +40,7 @@ class LanguagePPOPolicy(ActorCriticPolicy):
         obs_float = obs.float()
         features = self.feature_extractor(obs_float)
         
+        
         action_logits = self.action_net(features)
         action_dist = Categorical(logits=action_logits)
         
@@ -56,8 +56,10 @@ class LanguagePPOPolicy(ActorCriticPolicy):
     def evaluate_actions(self, obs: torch.Tensor, actions: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         obs_float = obs.float()
         features = self.feature_extractor(obs_float)
+        
         action_logits = self.action_net(features)
         action_dist = Categorical(logits=action_logits)
+        
         log_probs = action_dist.log_prob(actions)
         entropy = action_dist.entropy()
         values = self.value_net(features)
@@ -65,7 +67,10 @@ class LanguagePPOPolicy(ActorCriticPolicy):
         return values, log_probs, entropy
 
     def predict_values(self, obs):
+        """
+        Get the estimated values for given observations.
+        """
         obs_float = obs.float()
-        shared_features = self.shared_net(obs_float)
-        values = self.value_net(shared_features)
+        features = self.feature_extractor(obs_float)
+        values = self.value_net(features)
         return values
